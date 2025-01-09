@@ -14,34 +14,25 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f0f0;
+            background-color: transparent;
         }
         /* Desktop Styles */
         .techbbq-nav {
             max-width: 1440px;
             margin: 20px auto 0;
-            background-color: rgba(17, 17, 17, 0.8);
+            background-color: transparent;
             border-radius: 16px;
             padding: 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
         }
-        .techbbq-nav-logo img {
-            width: 150px;
-            height: auto;
-        }
-        
         /* Desktop Menu Styles */
         .techbbq-nav-menu {
             display: flex;
             align-items: center;
             gap: 40px;
-        }
-        .techbbq-group-left, .techbbq-group-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+            justify-content: flex-end;
         }
         .techbbq-nav-menu a {
             color: #f2f2f2;
@@ -99,7 +90,9 @@
             transform: translateY(-10px);
             transition: all 0.3s ease;
         }
-        .techbbq-dropdown:hover .techbbq-dropdown-content {
+        .techbbq-dropdown:hover .techbbq-dropdown-content, 
+        .techbbq-dropdown:focus-within .techbbq-dropdown-content,
+        .techbbq-dropdown-content:hover {
             display: block;
             opacity: 1;
             visibility: visible;
@@ -117,52 +110,6 @@
             color: #FF0028;
         }
         
-        /* Buy Tickets Button - Neon Style */
-        .techbbq-nav-menu .neon-button {
-            position: relative;
-            padding: 10px 20px !important;
-            border-radius: 12px;
-            border: 1px solid #FF0028 !important;
-            font-size: 16px !important;
-            text-transform: uppercase;
-            font-weight: 600;
-            background: transparent !important;
-            color: #f2f2f2 !important;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 0 0 0 transparent;
-            transition: all 0.3s ease-in-out;
-            width: auto;
-            display: inline-block;
-        }
-        .techbbq-nav-menu .neon-button:hover {
-            background: rgba(255, 0, 40, 0.1) !important;
-            box-shadow: 0 0 40px 10px rgba(255, 0, 40, 0.5);
-            color: #ffffff;
-        }
-        .techbbq-nav-menu .neon-button::before {
-            content: "";
-            display: block;
-            width: 0px;
-            height: 86%;
-            position: absolute;
-            top: 7%;
-            left: 0%;
-            opacity: 0;
-            background: linear-gradient(90deg, transparent, #FF0028, transparent);
-            box-shadow: 0 0 50px 30px #FF0028;
-            transform: skewX(-20deg);
-            transition: all 0.5s ease-in-out;
-        }
-        .techbbq-nav-menu .neon-button:hover::before {
-            animation: neon-shine 0.6s 0s linear;
-        }
-        .techbbq-nav-menu .neon-button:active {
-            transform: scale(0.95);
-            box-shadow: 0 0 0 0 transparent;
-            transition: all 0.2s ease-in;
-        }
-
         /* Mobile Styles */
         .mobile-menu-toggle {
             display: none;
@@ -286,38 +233,26 @@
 </head>
 <body>
     <nav class="techbbq-nav">
-        <div class="techbbq-nav-logo">
-            <a href="http://techbbq.local.dk/">
-                <img src="http://techbbq.local.dk/wp-content/uploads/2024/12/TechBBQ-Logo-Gradient.png" alt="TechBBQ Logo">
-            </a>
-        </div>
-
         <!-- Desktop Menu -->
         <div class="techbbq-nav-menu">
-            <div class="techbbq-group-left">
-                <a href="#about">About Us</a>
-                
-                <div class="techbbq-dropdown">
-                    <a href="#event">
-                        Techbbq 2025
-                        <i class="fas fa-chevron-down dropdown-arrow"></i>
-                    </a>
-                    <div class="techbbq-dropdown-content">
-                        <a href="#about-event">About the Event</a>
-                        <a href="#speakers">Speakers</a>
-                        <a href="#theme">Theme</a>
-                    </div>
+            <a href="#about">About Us</a>
+            
+            <div class="techbbq-dropdown">
+                <a href="#event">
+                    Techbbq 2025
+                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                </a>
+                <div class="techbbq-dropdown-content">
+                    <a href="#about-event">About the Event</a>
+                    <a href="#speakers">Speakers</a>
+                    <a href="#theme">Theme</a>
                 </div>
             </div>
 
-            <div class="techbbq-group-right">
-                <a href="#startups">Startups</a>
-                <a href="#investors">Investors</a>
-                <a href="#media">Media</a>
-                <a href="#projects">Projects</a>
-            </div>
-            
-            <button class="neon-button">Buy Tickets</button>
+            <a href="#startups">Startups</a>
+            <a href="#investors">Investors</a>
+            <a href="#media">Media</a>
+            <a href="#projects">Projects</a>
         </div>
 
         <!-- Mobile Menu Toggle -->
@@ -346,7 +281,6 @@
             <a href="#investors">Investors</a>
             <a href="#media">Media</a>
             <a href="#projects">Projects</a>
-            <a href="#tickets" class="neon-button">Buy Tickets</a>
         </div>
     </nav>
 
