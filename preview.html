@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechBBQ 2025 Menu Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0;
+        }
+        /* Desktop Styles */
+        .techbbq-nav {
+            max-width: 1440px;
+            margin: 20px auto 0;
+            background-color: rgba(17, 17, 17, 0.8);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .techbbq-nav-logo img {
+            width: 150px;
+            height: auto;
+        }
+        
+        /* Desktop Menu Styles */
+        .techbbq-nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .techbbq-group-left, .techbbq-group-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .techbbq-nav-menu a {
+            color: #f2f2f2;
+            text-decoration: none;
+            font-size: 16px;
+            position: relative;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+        }
+        .techbbq-nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background-color: #FF0028;
+            transition: width 0.3s ease, right 0.3s ease;
+        }
+        .techbbq-nav-menu a:hover {
+            color: #FF0028;
+        }
+        .techbbq-nav-menu a:hover::after {
+            width: 100%;
+            right: 0;
+        }
+        .techbbq-dropdown {
+            position: relative;
+            margin-right: 10px;
+        }
+        .dropdown-arrow {
+            margin-left: 8px;
+            font-size: 12px;
+            color: #f2f2f2;
+            transition: transform 0.3s ease;
+        }
+        .techbbq-dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        .techbbq-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #111111;
+            min-width: 200px;
+            border-radius: 8px;
+            padding: 12px 16px;
+            z-index: 1000;
+            top: 100%;
+            left: 0;
+            margin-top: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        .techbbq-dropdown:hover .techbbq-dropdown-content {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .techbbq-dropdown-content a {
+            display: block;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #f2f2f2;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+        .techbbq-dropdown-content a:hover {
+            color: #FF0028;
+        }
+        
+        /* Buy Tickets Button - Neon Style */
+        .techbbq-nav-menu .neon-button {
+            position: relative;
+            padding: 10px 20px !important;
+            border-radius: 12px;
+            border: 1px solid #FF0028 !important;
+            font-size: 16px !important;
+            text-transform: uppercase;
+            font-weight: 600;
+            background: transparent !important;
+            color: #f2f2f2 !important;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 0 0 0 transparent;
+            transition: all 0.3s ease-in-out;
+            width: auto;
+            display: inline-block;
+        }
+        .techbbq-nav-menu .neon-button:hover {
+            background: rgba(255, 0, 40, 0.1) !important;
+            box-shadow: 0 0 40px 10px rgba(255, 0, 40, 0.5);
+            color: #ffffff;
+        }
+        .techbbq-nav-menu .neon-button::before {
+            content: "";
+            display: block;
+            width: 0px;
+            height: 86%;
+            position: absolute;
+            top: 7%;
+            left: 0%;
+            opacity: 0;
+            background: linear-gradient(90deg, transparent, #FF0028, transparent);
+            box-shadow: 0 0 50px 30px #FF0028;
+            transform: skewX(-20deg);
+            transition: all 0.5s ease-in-out;
+        }
+        .techbbq-nav-menu .neon-button:hover::before {
+            animation: neon-shine 0.6s 0s linear;
+        }
+        .techbbq-nav-menu .neon-button:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 transparent;
+            transition: all 0.2s ease-in;
+        }
+
+        /* Mobile Styles */
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            position: relative;
+        }
+        .mobile-menu-toggle-icon {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            transform: rotate(0deg);
+            transition: .5s ease-in-out;
+            cursor: pointer;
+        }
+        .mobile-menu-toggle-icon span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: #f2f2f2;
+            border-radius: 9px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+        .mobile-menu-toggle-icon span:nth-child(1) {
+            top: 0px;
+        }
+        .mobile-menu-toggle-icon span:nth-child(2) {
+            top: 10px;
+        }
+        .mobile-menu-toggle-icon span:nth-child(3) {
+            top: 20px;
+        }
+        .mobile-menu-toggle-icon.open span:nth-child(1) {
+            top: 10px;
+            transform: rotate(135deg);
+        }
+        .mobile-menu-toggle-icon.open span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+        .mobile-menu-toggle-icon.open span:nth-child(3) {
+            top: 10px;
+            transform: rotate(-135deg);
+        }
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(17, 17, 17, 0.95);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-menu-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+        .mobile-menu-overlay a {
+            color: #f2f2f2;
+            text-decoration: none;
+            font-size: 24px;
+            text-transform: uppercase;
+            margin: 15px 0;
+            transition: color 0.3s ease;
+        }
+        .mobile-menu-overlay a:hover {
+            color: #FF0028;
+        }
+        .mobile-dropdown {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .mobile-dropdown-title {
+            color: #f2f2f2;
+            font-size: 24px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            position: relative;
+            cursor: pointer;
+        }
+        .mobile-dropdown-content {
+            display: none;
+            flex-direction: column;
+        }
+        .mobile-dropdown-title::after {
+            content: '▼';
+            margin-left: 10px;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+        .mobile-dropdown-title.active::after {
+            transform: rotate(180deg);
+        }
+        .mobile-dropdown.active .mobile-dropdown-content {
+            display: flex;
+        }
+
+        /* Responsive Breakpoint */
+        @media screen and (max-width: 1024px) {
+            .techbbq-nav-menu {
+                display: none;
+            }
+            .mobile-menu-toggle {
+                display: block;
+            }
+            .techbbq-nav {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="techbbq-nav">
+        <div class="techbbq-nav-logo">
+            <a href="http://techbbq.local.dk/">
+                <img src="http://techbbq.local.dk/wp-content/uploads/2024/12/TechBBQ-Logo-Gradient.png" alt="TechBBQ Logo">
+            </a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="techbbq-nav-menu">
+            <div class="techbbq-group-left">
+                <a href="#about">About Us</a>
+                
+                <div class="techbbq-dropdown">
+                    <a href="#event">
+                        Techbbq 2025
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <div class="techbbq-dropdown-content">
+                        <a href="#about-event">About the Event</a>
+                        <a href="#speakers">Speakers</a>
+                        <a href="#theme">Theme</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="techbbq-group-right">
+                <a href="#startups">Startups</a>
+                <a href="#investors">Investors</a>
+                <a href="#media">Media</a>
+                <a href="#projects">Projects</a>
+            </div>
+            
+            <button class="neon-button">Buy Tickets</button>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="mobile-menu-toggle">
+            <div class="mobile-menu-toggle-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay">
+            <a href="#about">About Us</a>
+            
+            <div class="mobile-dropdown">
+                <div class="mobile-dropdown-title">Techbbq 2025</div>
+                <div class="mobile-dropdown-content">
+                    <a href="#about-event">About the Event</a>
+                    <a href="#speakers">Speakers</a>
+                    <a href="#theme">Theme</a>
+                </div>
+            </div>
+
+            <a href="#startups">Startups</a>
+            <a href="#investors">Investors</a>
+            <a href="#media">Media</a>
+            <a href="#projects">Projects</a>
+            <a href="#tickets" class="neon-button">Buy Tickets</a>
+        </div>
+    </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle-icon');
+            const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+            const mobileDropdownTitle = document.querySelector('.mobile-dropdown-title');
+
+            // Hamburger Menu Toggle
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenuToggle.classList.toggle('open');
+                mobileMenuOverlay.classList.toggle('open');
+            });
+
+            // Mobile Dropdown Toggle
+            mobileDropdownTitle.addEventListener('click', () => {
+                const mobileDropdown = mobileDropdownTitle.closest('.mobile-dropdown');
+                mobileDropdownTitle.classList.toggle('active');
+                mobileDropdown.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

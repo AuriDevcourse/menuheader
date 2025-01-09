@@ -1,0 +1,121 @@
+/*
+Theme Name: TechBBQ 2025 Theme
+Author: Your Name
+Description: Custom theme for TechBBQ 2025
+Version: 1.0
+*/
+
+/* Import Inter Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* Global Reset */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Styles */
+.techbbq-nav {
+    max-width: 1440px;
+    margin: 20px auto 0;
+    background-color: rgba(17, 17, 17, 0.8);
+    border-radius: 16px;
+    padding: 15px;
+}
+
+.techbbq-nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.techbbq-nav-logo {
+    max-height: 50px;
+}
+
+.techbbq-nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.techbbq-nav-menu a {
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.techbbq-nav-menu a:hover {
+    color: #FF0028;
+    text-decoration: underline;
+}
+
+.techbbq-nav-menu a.active {
+    color: #CE0F2D;
+}
+
+.techbbq-nav-tickets {
+    background-color: #FF0028;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.techbbq-nav-tickets:hover {
+    background-color: #CE0F2D;
+}
+
+.techbbq-dropdown {
+    position: relative;
+}
+
+.techbbq-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #111111;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 8px;
+    padding: 12px 16px;
+}
+
+.techbbq-dropdown:hover .techbbq-dropdown-content {
+    display: block;
+}
+
+.techbbq-dropdown-content a {
+    color: #F2F2F2;
+    padding: 8px 0;
+    display: block;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .techbbq-nav-menu {
+        display: none; /* Will be replaced with mobile toggle */
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+        cursor: pointer;
+    }
+
+    .techbbq-nav-menu.mobile-active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(17, 17, 17, 0.9);
+    }
+
+    .techbbq-nav-menu a {
+        font-size: 14px;
+    }
+}
